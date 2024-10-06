@@ -1,4 +1,10 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { SubdivisionDisplay } from "./SubdivisionDisplay";
 import dayjs from "dayjs";
 import testData from "./testData.json";
@@ -87,7 +93,6 @@ describe("SubdivisionDisplay Component", () => {
   test("Filter option changes", async () => {
     render(<SubdivisionDisplay />);
 
-    // Wait for table to render
     await waitFor(() =>
       expect(screen.queryByText("Loading...")).not.toBeInTheDocument()
     );
@@ -109,14 +114,17 @@ describe("SubdivisionDisplay Component", () => {
   test("Opens subdivision details when row is clicked", async () => {
     render(<SubdivisionDisplay />);
 
-    // Wait for table to render
     await waitFor(() =>
       expect(screen.queryByText("Loading...")).not.toBeInTheDocument()
     );
 
     // Click on the first row to view details
     const firstRow = screen.getAllByRole("row")[1];
-    fireEvent.click(firstRow);
+
+    // Wrap the click event in act
+    act(() => {
+      fireEvent.click(firstRow);
+    });
 
     // Check if the subdivision details view is rendered
     expect(screen.getByText("ID:")).toBeInTheDocument();
@@ -125,19 +133,24 @@ describe("SubdivisionDisplay Component", () => {
   test("Returns to table view when Go Back is clicked", async () => {
     render(<SubdivisionDisplay />);
 
-    // Wait for table to render
     await waitFor(() =>
       expect(screen.queryByText("Loading...")).not.toBeInTheDocument()
     );
 
     // Click on first row
     const firstRow = screen.getAllByRole("row")[1];
-    firstRow.click();
+    act(() => {
+      fireEvent.click(firstRow);
+    });
 
     // Click back button
     await waitFor(() => {
       const goBackButton = screen.getByText("Go Back");
-      goBackButton.click();
+
+      // Wrap this click in act as well
+      act(() => {
+        fireEvent.click(goBackButton);
+      });
     });
 
     // Check if the table is displayed again
