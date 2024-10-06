@@ -1,0 +1,57 @@
+/* In future can update styling of all elements, inc buttons etc */
+.resultsTable {
+  display: block;
+  margin: 0.5rem 1rem;
+  max-height: 90vh;
+  width: 60rem;
+  table-layout: fixed;
+
+  > thead > tr {
+    th:first-child {
+      width: 5rem;
+    }
+    th {
+      width: 50rem;
+    }
+  }
+}
+
+.loading {
+  margin: 1rem;
+  font-family: sans-serif;
+}
+
+.header,
+.hoverableHeader {
+  height: 1rem;
+  font-family: sans-serif;
+}
+
+.hoverableHeader {
+  cursor: pointer;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: #5f3ad852;
+  }
+}
+
+.tableRow {
+  cursor: pointer;
+  &:hover {
+    background-color: #5f3ad852;
+  }
+}
+
+.pagination {
+  margin: 0 1rem;
+}
+
+.subdivisionDetails {
+  margin: 0.5rem 1rem;
+  font-family: sans-serif;
+}
+
+.backButton {
+  margin: 0.5rem 0;
+}
